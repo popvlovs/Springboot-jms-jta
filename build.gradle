@@ -1,0 +1,44 @@
+group 'org.popvlovs.webapptest'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+buildscript {
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven { url 'http://repo.spring.io/milestone' }
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.0.0.BUILD-SNAPSHOT'
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+jar {
+    baseName = 'spring-webapp-test'
+    version =  '0.0.1-SNAPSHOT'
+}
+
+repositories {
+    maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile group: 'org.springframework', name: 'spring-jms', version: '5.0.0.RC3'
+    //compile group: 'org.apache.activemq', name: 'activemq-all', version: '5.15.0'
+    compile group: 'org.apache.activemq', name: 'activemq-core', version: '5.7.0'
+    compile group: 'org.apache.activemq', name: 'activemq-client', version: '5.15.0'
+    compile group: 'org.apache.activemq', name: 'activemq-spring', version: '5.15.0'
+    runtime("mysql:mysql-connector-java")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
